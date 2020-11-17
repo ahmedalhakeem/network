@@ -1,0 +1,34 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    TODO
+    <br>
+    All Posts
+    <br>
+    {% if user.is_authenticated %}
+    <form action="{% url 'post' %}" method="POST">
+        {% csrf_token %}
+        {{ new_post }}
+        <input type="submit" value="submit" >
+    </form>
+    {% endif %}
+
+    <!--display all posts-->
+   
+    
+    <div class="main">
+        {% for post in allposts %}
+        <div class="post-details">
+            <h2>{{ post.created_by }}</h2>
+            <br>
+            <p>{{ post.content }}</p>
+            <i>{{ post.timestamp }}</i>
+
+        </div>
+        {% endfor %}
+    </div>
+    
+    
+    
+{% endblock %}
