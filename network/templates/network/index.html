@@ -20,7 +20,7 @@
     <div class="main">
         {% for post in allposts %}
         <div class="post-details">
-            <h2>{{ post.created_by }}</h2>
+            <h2><a href="{% url 'profile' post.created_by.id %}">{{ post.created_by }}</a></h2>
             <br>
             <p>{{ post.content }}</p>
             <i>{{ post.timestamp }}</i>

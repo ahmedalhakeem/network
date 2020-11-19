@@ -8,3 +8,11 @@
    border: 1px solid black; 
    color: green;
 }
+#user_posts {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+#user_posts .userpost{
+    border: 1px solid black;
+}

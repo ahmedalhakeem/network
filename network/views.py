@@ -96,5 +96,32 @@ def post(request):
         new_post.save()
         return HttpResponseRedirect(reverse('index'))
 
-def profile(user_id):
-    return
+@login_required
+def profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+    #other = User.objects.exclude(pk= user_id)
+    #print(request.user.id)
+    #print(user.id)
+    user_login= User.objects.get(pk=request.user.id)
+
+    if(request.user.id == user.id):
+        follow=False
+    else:
+        follow = True
+
+    following = user.following.all().count()
+    followers = user.followers.all().count()
+    user_posts = Post.objects.filter(created_by=user_id)
+    
+    
+
+    return render(request, "network/profile.html",{
+        "following": following,
+        "followers": followers,
+        "user_posts" : user_posts,
+        "follow" : follow
+
+
+    })
+
+    

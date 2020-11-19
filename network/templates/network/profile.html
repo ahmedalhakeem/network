@@ -1,0 +1,21 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if follow %}
+    <button>follow</button>
+    {% endif %}
+    <h1>following : {{ following }}</h1>
+    <h1>followers: {{ followers }}</h1>
+    <div id="user_posts">
+    {% for upost in user_posts %}
+    <div class="userpost">
+        <h2>{{upost.created_by }}</h2>
+   
+        <p>{{ upost.content }} </p>
+        <i>{{ upost.timestamp }}</i>
+    </div>
+    
+    {% endfor %}
+</div>
+{% endblock%}
