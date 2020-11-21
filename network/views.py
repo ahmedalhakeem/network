@@ -108,7 +108,6 @@ def profile(request, user_id):
         follow=False
     else:
         follow = True
-
     following = user.following.all().count()
     followers = user.followers.all().count()
     user_posts = Post.objects.filter(created_by=user_id)
@@ -120,8 +119,22 @@ def profile(request, user_id):
         "followers": followers,
         "user_posts" : user_posts,
         "follow" : follow
-
-
     })
 
+@login_required
+def following(request, user_id):
+    user = User.objects.get(pk=user_id)
+    followings = user.following.all()
+    for following in followings:
+        poster = Post.objects.filter(created_by=following)
+        print(poster)
+        
+    
+    #for follow in followings:
+     #   f = Post.objects.filter(created_by=follow)
+      #  print(f)
+
+    return render(request, "network/following.html",{
+        "poster" : poster
+    })
     
