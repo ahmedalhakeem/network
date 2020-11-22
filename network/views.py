@@ -5,16 +5,20 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.forms import forms
+from django.core.paginator import Paginator
 
-from .models import User
+from .models import User, Post
 from .forms import *
 
 
-
+ 
 def index(request):
 
     #display all posts 
     allposts = Post.objects.all().order_by('-timestamp')
+    paginator =  Paginator(allposts, 10) 
+    page_number = request.GET.get('page')
+    allposts = paginator.get_page(page_number)
     
     if request.method == 'POST':
          new_post = PostForm(request.POST)
@@ -28,7 +32,8 @@ def index(request):
         new_post = PostForm()
         return render(request, "network/index.html",{
             "new_post" : new_post,
-            "allposts" : allposts
+            "allposts" : allposts,
+            
         })
        
         

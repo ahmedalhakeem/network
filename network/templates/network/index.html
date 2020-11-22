@@ -19,6 +19,7 @@
     
     <div class="main">
         {% for post in allposts %}
+        
         <div class="post-details">
             <h2><a href="{% url 'profile' post.created_by.id %}">{{ post.created_by }}</a></h2>
             <br>
@@ -27,6 +28,26 @@
 
         </div>
         {% endfor %}
+    </div>
+    {% for contact in allposts %}
+    {{contact.full_name|upper}}
+    {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if allposts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ allposts.previous_page_number }}">previous</a>
+            {% endif %}
+        
+            <span class="current">
+            Page {{allposts.number}} of {{ allposts.paginator.num_pages }}
+            </span>
+        
+            {% if allposts.has_next %}
+                <a href="?page={{ allposts.next_page_number }}">next</a>
+                <a href="?page={{allposts.paginator.num_pages}}">last &raquo;</a>
+            {% endif %}
+        </span>
     </div>
     
     
