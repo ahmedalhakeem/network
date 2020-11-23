@@ -11,7 +11,6 @@ from .models import User, Post
 from .forms import *
 
 
- 
 def index(request):
 
     #display all posts 
@@ -19,6 +18,10 @@ def index(request):
     paginator =  Paginator(allposts, 10) 
     page_number = request.GET.get('page')
     allposts = paginator.get_page(page_number)
+    #user = User.objects.get(pk = request.user.id)
+    #print(user)
+    
+       
     
     if request.method == 'POST':
          new_post = PostForm(request.POST)
@@ -33,6 +36,7 @@ def index(request):
         return render(request, "network/index.html",{
             "new_post" : new_post,
             "allposts" : allposts,
+            
             
         })
        
@@ -142,4 +146,13 @@ def following(request, user_id):
     return render(request, "network/following.html",{
         "poster" : poster
     })
+def edit_psot(request, user_id):
+    poster = User.objects.get(pk=user_id)
+    posts = Post.objects.all()
+    for post in posts:
+        if (post.created_by== poster):
+            edit=True
+        else:
+            edit=False
+        
     

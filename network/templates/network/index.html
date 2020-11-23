@@ -18,20 +18,29 @@
    
     
     <div class="main">
+       
+
         {% for post in allposts %}
+           
+
         
         <div class="post-details">
+            {% if post.created_by == user %}
+                <button>edit</button>
+            {% endif %}
+            
             <h2><a href="{% url 'profile' post.created_by.id %}">{{ post.created_by }}</a></h2>
             <br>
             <p>{{ post.content }}</p>
             <i>{{ post.timestamp }}</i>
+            {% if post.id == user.is_authenticated.id %}
+                <button>edit</button>
+           {% endif %}
 
         </div>
         {% endfor %}
     </div>
-    {% for contact in allposts %}
-    {{contact.full_name|upper}}
-    {% endfor %}
+
     <div class="pagination">
         <span class="step-links">
             {% if allposts.has_previous %}
@@ -52,4 +61,7 @@
     
     
     
+{% endblock %}
+{% block script %}
+    <script src="{% static 'network/inbox.js' %}"></script>
 {% endblock %}
