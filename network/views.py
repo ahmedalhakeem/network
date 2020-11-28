@@ -1,11 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.forms import forms
 from django.core.paginator import Paginator
+import datetime
+
 
 from .models import User, Post
 from .forms import *
@@ -146,13 +148,13 @@ def following(request, user_id):
     return render(request, "network/following.html",{
         "poster" : poster
     })
-def edit_psot(request, user_id):
-    poster = User.objects.get(pk=user_id)
-    posts = Post.objects.all()
-    for post in posts:
-        if (post.created_by== poster):
-            edit=True
-        else:
-            edit=False
+
+def editpost(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    newpost = request.GET["newpost"]
+    post.content=newpost
+    post.timestamp = datetime.datetime.now()
+    post.save()
+    return JsonResponse({"status": "success"}) 
         
     

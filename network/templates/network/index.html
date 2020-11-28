@@ -18,26 +18,21 @@
    
     
     <div class="main">
-       
-
+    
         {% for post in allposts %}
-           
-
-        
-        <div class="post-details">
-            {% if post.created_by == user %}
-                <button>edit</button>
-            {% endif %}
+            <div class="post-details" id="{{ post.id }}">
+                {% if post.created_by == user %}
+                    <button class="edit-post">edit</button>
+                    <button class="save">save</button>
+                {% endif %}
             
-            <h2><a href="{% url 'profile' post.created_by.id %}">{{ post.created_by }}</a></h2>
-            <br>
-            <p>{{ post.content }}</p>
-            <i>{{ post.timestamp }}</i>
-            {% if post.id == user.is_authenticated.id %}
-                <button>edit</button>
-           {% endif %}
+                <h2><a href="{% url 'profile' post.created_by.id %}">{{ post.created_by }}</a></h2>
+                <br>
+                <textarea name="" class="textarea" cols="30" rows="10">{{ post.content }}</textarea>
+                <p>{{ post.content }}</p>
+                <i>{{ post.timestamp }}</i>
 
-        </div>
+            </div>
         {% endfor %}
     </div>
 
@@ -63,5 +58,5 @@
     
 {% endblock %}
 {% block script %}
-    <script src="{% static 'network/inbox.js' %}"></script>
+    <script src="{% static 'network/index.js' %}"></script>
 {% endblock %}

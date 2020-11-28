@@ -16,3 +16,9 @@
 #user_posts .userpost{
     border: 1px solid black;
 }
+.main .post-details .save{
+    display: none;
+}
+.main .post-details .textarea{
+    display: none;
+}
