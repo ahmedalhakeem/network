@@ -1,0 +1,21 @@
+{% extends "network/layout.html" %}
+{% block body %}
+    <div class="main">
+        {% for post in poster %}
+        <div class="post-details">
+            {% if post.created_by == user %}
+                <button>edit</button>
+            {% endif %}
+            <h2><a href="{% url 'profile' post.created_by.id %}">{{ post.created_by }}</a></h2>
+                <br>
+                <p id="{{post.timestamp}}">{{ post.content }}</p>
+                <i>{{ post.timestamp }}</i>
+        </div>
+        
+    {% endfor %}
+    </div>
+    
+    
+
+    
+{% endblock %}
