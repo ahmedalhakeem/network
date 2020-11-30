@@ -3,7 +3,11 @@
 
 {% block body %}
     {% if follow %}
-    <button>follow</button>
+    {% if is_follow %}
+        <a href="{% url 'follow' user_id %}">unfollow</a>
+    {% else %}
+        <a href="{% url 'follow' user_id %}">follow</a>
+    {% endif%}
     {% endif %}
     <h1>following : {{ following }}</h1>
     <h1>followers: {{ followers }}</h1>

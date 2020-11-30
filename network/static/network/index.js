@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             parent.children[4].style.display = 'none';
                             parent.children[0].style.display = 'block';
                             parent.children[1].style.display = 'none';
-                            console.log(Date.now())
+                            
 
                         }
                         else{

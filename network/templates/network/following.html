@@ -1,7 +1,7 @@
 {% extends "network/layout.html" %}
 {% block body %}
     <div class="main">
-        {% for post in poster %}
+        {% for post in posts %}
         <div class="post-details">
             {% if post.created_by == user %}
                 <button>edit</button>

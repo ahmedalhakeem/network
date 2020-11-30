@@ -110,17 +110,16 @@ def post(request):
 @login_required
 def profile(request, user_id):
     user = User.objects.get(pk=user_id)
-    #other = User.objects.exclude(pk= user_id)
-    #print(request.user.id)
-    #print(user.id)
+
     user_login= User.objects.get(pk=request.user.id)
 
     if(request.user.id == user.id):
         follow=False
     else:
         follow = True
-    following = user.following.all().count()
-    followers = user.followers.all().count()
+    is_follow = user.following.filter(username=user_login).exists()
+    followers = user.following.all().count()
+    following = user.followers.all().count()
     user_posts = Post.objects.filter(created_by=user_id)
     
     
@@ -129,13 +128,17 @@ def profile(request, user_id):
         "following": following,
         "followers": followers,
         "user_posts" : user_posts,
-        "follow" : follow
+        "follow" : follow,
+        "user_id" : user_id,
+        "is_follow" : is_follow
     })
 
 @login_required
 def following(request, user_id):
     user = User.objects.get(pk=user_id)
-    followings = user.following.all()
+    followings = user.followers.all()
+    posts = Post.objects.filter(created_by__in=followings).order_by('-timestamp')
+    print(followings)
     for following in followings:
         poster = Post.objects.filter(created_by=following)
         print(poster)
@@ -146,7 +149,9 @@ def following(request, user_id):
       #  print(f)
 
     return render(request, "network/following.html",{
-        "poster" : poster
+        #"poster" : poster,
+        "posts" : posts
+        
     })
 
 def editpost(request, post_id):
@@ -157,4 +162,13 @@ def editpost(request, post_id):
     post.save()
     return JsonResponse({"status": "success"}) 
         
-    
+def follow(request, user_id):
+    profile_user = User.objects.get(pk=user_id)
+    follower = User.objects.get(pk=request.user.id)
+    if profile_user.following.filter(username=follower).exists():
+        profile_user.following.remove(follower) 
+    else:
+        profile_user.following.add(follower)
+   # print(profile_user)
+    #print(follower)
+    return HttpResponseRedirect(reverse('profile',args=(user_id,)))
