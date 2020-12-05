@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', function(){
+    like_check();
+
+    document.addEventListener('click', event=>{
+        //event.preventDefault()
+        const element = event.target;
+        if(element.className==='like'){
+            event.preventDefault()
+            
+            fetch(`like/${element.parentElement.id}`)
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.status==="success"){
+                    like_check();
+                    console.log(data);
+                }
+            })
+        }
+    })
+
     
     document.addEventListener('click', event =>{
         const element = event.target;
@@ -35,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
                 
             })
-        
+            
             
 
             
@@ -44,3 +64,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
     } )
 })
+function like_check(){
+    document.querySelectorAll('.like').forEach(e =>{
+        fetch(`/check_like?id=${e.parentElement.id}`)
+        .then(res=>res.json())
+        .then(data=>{
+            if (data.isLike){
+                e.textContent='Unlike'
+            }
+            else{
+                e.textContent = 'Like'
+            }
+        })
+    });
+    
+}

@@ -2,16 +2,19 @@
 {% load static %}
 
 {% block body %}
-    TODO
+    <!--TODO-->
     <br>
     All Posts
     <br>
     {% if user.is_authenticated %}
-    <form action="{% url 'post' %}" method="POST">
-        {% csrf_token %}
-        {{ new_post }}
-        <input type="submit" value="submit" >
-    </form>
+    <div class="enter-post-content">
+        <form action="{% url 'post' %}" method="POST" class="post-content">
+            {% csrf_token %}
+            {{ new_post }}
+            <input type="submit" value="submit" class="post-button" >
+        </form>
+    </div>
+    
     {% endif %}
 
     <!--display all posts-->
@@ -31,6 +34,7 @@
                 <textarea name="" class="textarea" cols="30" rows="10">{{ post.content }}</textarea>
                 <p>{{ post.content }}</p>
                 <i>{{ post.timestamp }}</i>
+                <a class="like" href="{% url 'like' post.id %}">like</a>
 
             </div>
         {% endfor %}

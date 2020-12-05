@@ -9,7 +9,7 @@ class PostForm(ModelForm):
 
 
 class PostForm(forms.Form):
-    content = forms.CharField(label="write a post", widget=forms.Textarea, required=True)
+    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'post-area', 'placeholder': 'enter your post here'}), required=True)
     #imestamp = forms.DateTimeField(required=True)
     #created_by = forms.ModelChoiceField(queryset=User.objects.all())
     

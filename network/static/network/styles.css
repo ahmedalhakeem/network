@@ -7,6 +7,7 @@
 .main .post-details {
    border: 1px solid black; 
    color: green;
+   background-color: azure;
 }
 #user_posts {
     margin-left: auto;
@@ -21,4 +22,34 @@
 }
 .main .post-details .textarea{
     display: none;
+}
+
+.enter-post-content{
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 100%;*/
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}
+.enter-post-content .post-content{
+    width: 70%;
+    color: blue;
+    margin-right: auto;
+    margin-left: auto;
+}
+.enter-post-content .post-content .post-area{
+    width: 80%;
+    border: 1px solid green;
+    background-color: azure;
+    color:black;
+}
+.enter-post-content .post-button{
+
+    position: relative;
+    max-width: 100px;
+    background-color:azure;
+    height: 40px;
+    border-radius: 5px;
+    clear: both;
 }

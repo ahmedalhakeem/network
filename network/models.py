@@ -13,14 +13,15 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="poster")
     like = models.ManyToManyField(User, related_name="user_like")
+    num_likes= models.IntegerField(default=0)
     image = models.ImageField(default = False ,upload_to ='media/')
     
     def __str__(self):
         return f"{self.content}, {self.timestamp},{self.created_by}, {self.image}"
 
-class Like(models.Model):
-    like = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post")
-    liker = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
+#class Like(models.Model):
+ #   like = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post")
+  #  liker = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
 
 #class Follow(models.Model):
  #   follower = models.ManyToManyField(User,  related_name="following+")

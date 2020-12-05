@@ -172,3 +172,22 @@ def follow(request, user_id):
    # print(profile_user)
     #print(follower)
     return HttpResponseRedirect(reverse('profile',args=(user_id,)))
+
+def like(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if post.like.filter(username= request.user).exists():
+        post.like.remove(request.user)
+        
+
+    else:
+        post.like.add(request.user)
+        
+    
+    return JsonResponse({"status": "success", "num_likes": post.like.all().count() })
+
+def check_like(request):
+    post = Post.objects.get(pk=request.GET["id"])
+    return JsonResponse({
+        'isLike': post.like.filter(username=request.user).exists()
+    })
+    
