@@ -9,7 +9,8 @@ class PostForm(ModelForm):
 
 
 class PostForm(forms.Form):
-    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'post-area', 'placeholder': 'enter your post here'}), required=True)
+    content = forms.CharField(label="",widget=forms.Textarea(attrs={'class': 'post-area', 'placeholder': 'enter your post here'}), required=True)
+    image = forms.ImageField(label="Upload Image", required=False, widget=forms.FileInput(attrs={'class': 'image-post'}))
     #imestamp = forms.DateTimeField(required=True)
     #created_by = forms.ModelChoiceField(queryset=User.objects.all())
     

@@ -7,13 +7,14 @@ document.addEventListener('DOMContentLoaded', function(){
         if(element.className==='like'){
             event.preventDefault()
             
-            fetch(`like/${element.parentElement.id}`)
+            fetch(`like/${element.parentElement.className}`)
             .then(response => response.json())
             .then(data => {
 
                 if (data.status==="success"){
                     like_check();
-                    console.log(data);
+                    element.parentElement.children[1].textContent = data.num_likes
+                    console.log(element.parentElement.children[1]);
                 }
             })
         }
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 function like_check(){
     document.querySelectorAll('.like').forEach(e =>{
-        fetch(`/check_like?id=${e.parentElement.id}`)
+        fetch(`/check_like?id=${e.parentElement.className}`)
         .then(res=>res.json())
         .then(data=>{
             if (data.isLike){

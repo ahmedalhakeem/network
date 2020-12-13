@@ -39,7 +39,8 @@
     margin-left: auto;
 }
 .enter-post-content .post-content .post-area{
-    width: 80%;
+    width: 50%;
+    height: 40px;
     border: 1px solid green;
     background-color: azure;
     color:black;

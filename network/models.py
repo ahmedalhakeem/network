@@ -14,7 +14,7 @@ class Post(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="poster")
     like = models.ManyToManyField(User, related_name="user_like")
     num_likes= models.IntegerField(default=0)
-    image = models.ImageField(default = False ,upload_to ='media/')
+    image = models.ImageField(blank= True,upload_to ='media')
     
     def __str__(self):
         return f"{self.content}, {self.timestamp},{self.created_by}, {self.image}"

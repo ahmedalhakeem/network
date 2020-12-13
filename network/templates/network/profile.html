@@ -12,12 +12,15 @@
     <h1>following : {{ following }}</h1>
     <h1>followers: {{ followers }}</h1>
     <div id="user_posts">
-    {% for upost in user_posts %}
+    {% for post in allposts %}
     <div class="userpost">
-        <h2>{{upost.created_by }}</h2>
+        <h2>{{ post.created_by }}</h2>
+        {% if post.image %}
+            <img src="{{ post.image.url }}">
+        {% endif %}
    
-        <p>{{ upost.content }} </p>
-        <i>{{ upost.timestamp }}</i>
+        <p>{{ post.content }} </p>
+        <i>{{ post.timestamp }}</i>
     </div>
     
     {% endfor %}

@@ -22,25 +22,12 @@ def index(request):
     allposts = paginator.get_page(page_number)
     #user = User.objects.get(pk = request.user.id)
     #print(user)
-    
-       
-    
-    if request.method == 'POST':
-         new_post = PostForm(request.POST)
-         if new_post.is_valid():
-             content = new_post.cleaned_data['content']
-             #timestamp = new_post.cleaned_data['timestamp']
-             #created_by = new_post.cleaned_data['created_by']
-             return HttpResponseRedirect(reverse('post'))
-             
-    else:
-        new_post = PostForm()
-        return render(request, "network/index.html",{
-            "new_post" : new_post,
-            "allposts" : allposts,
-            
-            
-        })
+    new_post = PostForm()
+    return render(request, "network/index.html",{
+        "new_post" : new_post,
+        "allposts" : allposts,
+        
+    })
        
         
 
@@ -99,11 +86,13 @@ def register(request):
 
 @login_required
 def post(request):
+    form = PostForm(request.POST or None, request.FILES or None)
     poster = User.objects.get(pk= request.user.id)
 
-    if request.method == "POST":
-        content = request.POST['content']
-        new_post = Post(content=content, created_by=poster)
+    if form.is_valid():
+        content = form.cleaned_data['content']
+        image = form.cleaned_data['image']
+        new_post = Post(content=content, created_by=poster, image=image)
         new_post.save()
         return HttpResponseRedirect(reverse('index'))
 
@@ -120,14 +109,14 @@ def profile(request, user_id):
     is_follow = user.following.filter(username=user_login).exists()
     followers = user.following.all().count()
     following = user.followers.all().count()
-    user_posts = Post.objects.filter(created_by=user_id)
+    allposts = Post.objects.filter(created_by=user_id).order_by('-timestamp')
     
     
 
     return render(request, "network/profile.html",{
         "following": following,
         "followers": followers,
-        "user_posts" : user_posts,
+        "allposts" : allposts,
         "follow" : follow,
         "user_id" : user_id,
         "is_follow" : is_follow
@@ -177,12 +166,14 @@ def like(request, post_id):
     post = Post.objects.get(pk=post_id)
     if post.like.filter(username= request.user).exists():
         post.like.remove(request.user)
+        post.num_likes= post.like.all().count()
         
 
     else:
         post.like.add(request.user)
+        post.num_likes = post.like.all().count()
         
-    
+    post.save()
     return JsonResponse({"status": "success", "num_likes": post.like.all().count() })
 
 def check_like(request):
