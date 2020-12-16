@@ -19,15 +19,7 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.content}, {self.timestamp},{self.created_by}, {self.image}"
 
-#class Like(models.Model):
- #   like = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post")
-  #  liker = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
 
-#class Follow(models.Model):
- #   follower = models.ManyToManyField(User,  related_name="following+")
-  #  following = models.ManyToManyField(User, related_name="followers+")
-
-    
 
 
 

@@ -1,14 +1,52 @@
 .main{
-    border: 1px solid black;
-    width: 90%;
+    /*border: 1px solid black;*/
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 }
 .main .post-details {
-   border: 1px solid black; 
-   color: green;
+   border: 1px solid black;
+   margin-top: 20px;
+   margin-bottom: 20px;
+   /*color: green;*/
    background-color: azure;
+   position: relative;
+   
 }
+.main .post-details h2{
+    margin-left: 20px;
+    
+
+}
+.main .post-details p{
+    margin-left: 20px;
+    /*border: 1px solid black;*/
+    color: blue ;
+}
+.main .post-details .time{
+    margin-left: 20px;
+    color: brown;
+    position: absolute;
+    float: right;
+    /*border: 1px solid red;*/
+    bottom: 10px;
+    right: 10px;
+}
+.main .post-details img{
+    width: 300px;
+    height: 300px;
+    margin-left: 20px;
+    border: 1px solid blue;
+    /*float: left;*/
+}
+.like{
+    margin-left: 20px;
+}
+.num_like{
+    margin-left: 10px;
+    font-weight: bold;
+}
+
 #user_posts {
     margin-left: auto;
     margin-right: auto;
@@ -27,16 +65,16 @@
 .enter-post-content{
     margin-left: auto;
     margin-right: auto;
-    /*width: 100%;*/
+    width: 60%;
     margin-top: 10px;
     margin-bottom: 20px;
-
+    position: relative;
+    
 }
 .enter-post-content .post-content{
-    width: 70%;
+    width: 100%;
     color: blue;
-    margin-right: auto;
-    margin-left: auto;
+    
 }
 .enter-post-content .post-content .post-area{
     width: 50%;

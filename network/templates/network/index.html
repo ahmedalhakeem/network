@@ -24,22 +24,22 @@
     
         {% for post in allposts %}
             <div class="post-details" id="{{ post.id }}">
-                {% if post.created_by == user %}
-                    <button class="edit-post">edit</button>
-                    <button class="save">save</button>
-                {% endif %}
-            
+                
                 <h2><a href="{% url 'profile' post.created_by.id %}">{{ post.created_by }}</a></h2>
                 <br>
                 <textarea name="" class="textarea" cols="30" rows="10">{{ post.content }}</textarea>
                 <p>{{ post.content }}</p>
-                <i>{{ post.timestamp }}</i>
                 {% if post.image %}
                     <img src="{{ post.image.url }}">
                 {% endif %}
+                <i class="time">{{ post.timestamp }}</i>
+                {% if post.created_by == user %}
+                <button class="edit-post">edit</button>
+                <button class="save">save</button>
+                {% endif %}
                 <div class="{{ post.id }}">
                     <a class="like" href="{% url 'like' post.id %}">like</a>
-                    <i>{{post.num_likes}}</i>
+                    <i class="num_like">{{post.num_likes}}</i>
                 </div>
                
 

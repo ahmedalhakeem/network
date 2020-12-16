@@ -26,10 +26,23 @@ document.addEventListener('DOMContentLoaded', function(){
         if(element.className === 'edit-post'){
             const parents =  element.parentElement;
             console.log(parents.children);
-            parents.children[5].style.display = 'none';
+            /*parents.children[5].style.display = 'none';
             parents.children[4].style.display = 'block';
             parents.children[0].style.display = 'none';
-            parents.children[1].style.display = 'block';
+            parents.children[1].style.display = 'block';*/
+
+            //hide post content
+            parents.children[3].style.display = 'none';
+            //display textarea
+            parents.children[2].style.display = 'block';
+            //hide edit button
+            parents.children[5].style.display = 'none';
+            //show save btn
+            parents.children[6].style.display = 'display';
+
+
+
+
 
             document.addEventListener('click', event =>{
                 const save = event.target;
