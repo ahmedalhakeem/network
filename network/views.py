@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.forms import forms
 from django.core.paginator import Paginator
 import datetime
+from django.utils import timezone
 
 
 from .models import User, Post
@@ -92,7 +93,8 @@ def post(request):
     if form.is_valid():
         content = form.cleaned_data['content']
         image = form.cleaned_data['image']
-        new_post = Post(content=content, created_by=poster, image=image)
+        new_post = Post(content=content,timestamp=datetime.datetime.now(), created_by=poster, image=image)
+        print(new_post.timestamp)
         new_post.save()
         return HttpResponseRedirect(reverse('index'))
 

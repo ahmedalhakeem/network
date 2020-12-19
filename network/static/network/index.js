@@ -33,31 +33,31 @@ document.addEventListener('DOMContentLoaded', function(){
 
             //hide post content
             parents.children[3].style.display = 'none';
-            //display textarea
-            parents.children[2].style.display = 'block';
+            
             //hide edit button
             parents.children[5].style.display = 'none';
+            //display textarea
+            parents.children[2].style.display = 'block';
             //show save btn
-            parents.children[6].style.display = 'display';
-
-
-
-
+            parents.children[6].style.display = 'block';
+            
+            
 
             document.addEventListener('click', event =>{
                 const save = event.target;
                 if(save.className === 'save'){
                     const parent = save.parentElement;
-                    const new_post = parent.children[4].value;
-                    fetch(`editpost/${save.parentElement.id}?newpost=${new_post}`)
+                    const new_post = parent.children[2].value;
+                    fetch(`editpost/${parent.id}?newpost=${new_post}`)
                     .then(response => response.json())
                     .then(result => {
                         if(result.status=== 'success'){
-                            parent.children[5].textContent = new_post;
-                            parent.children[5].style.display ='block';
-                            parent.children[4].style.display = 'none';
-                            parent.children[0].style.display = 'block';
-                            parent.children[1].style.display = 'none';
+                            parent.children[3].textContent = new_post;
+                            parent.children[3].style.display ='block';
+                            parent.children[5].style.display = 'block';
+                            parent.children[2].style.display = 'none';
+                            parent.children[6].style.display = 'none';
+                            //parent.children[1].style.display = 'none';
                             
 
                         }
